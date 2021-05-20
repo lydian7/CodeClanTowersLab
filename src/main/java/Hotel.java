@@ -25,7 +25,9 @@ public class Hotel {
     }
 
     public void checkGuestsIn(ArrayList<Guest> guests, Room room){
-        room.addGuests(guests);
+        if(guests.size() > 0 && guests.size() <= room.getCapacity() && room.getNumberGuests() == 0) {
+            room.addGuests(guests);
+        }
     }
 
     public void checkGuestsOut(Room room) {
