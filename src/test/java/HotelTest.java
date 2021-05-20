@@ -32,7 +32,7 @@ public class HotelTest {
         guest5 = new Guest("Mary Mendacious");
         guests = new ArrayList<>();
         guests.add(guest1);
-        singleRoom = new Bedroom(4, 13, RoomType.SINGLE, 100);
+        singleRoom = new Bedroom(1, 13, RoomType.SINGLE, 100);
         conferenceRoom = new ConferenceRoom(4, "The Ambassador's Suite");
         bedrooms = new ArrayList<Bedroom>();
         conferenceRooms = new ArrayList<ConferenceRoom>();
@@ -61,6 +61,32 @@ public class HotelTest {
     public void testCheckIn() {
         hotel.checkGuestsIn(guests, singleRoom);
         assertEquals(1, singleRoom.getNumberGuests());
+    }
+
+    @Test
+    public void cantCheckInEmptyGuestList() {
+        ArrayList<Guest> emptyList = new ArrayList<>();
+        hotel.checkGuestsIn(emptyList, singleRoom);
+        assertEquals(0, singleRoom.getNumberGuests());
+    }
+
+    @Test
+    public void cantCheckInMoreThanCapacity() {
+        Guest guest = new Guest("I'M BATMAN");
+        guests.add(guest);
+        hotel.checkGuestsIn(guests, singleRoom);
+        assertEquals(0, singleRoom.getNumberGuests());
+    }
+
+    @Test
+    public void cantBookToFullRoom() {
+        Bedroom familyRoom = new Bedroom(4, 45, RoomType.FAMILY, 100);
+        hotel.checkGuestsIn(guests, familyRoom);
+        Guest guest = new Guest("I'M BATMAN");
+        ArrayList<Guest> testGuest = new ArrayList<>();
+        testGuest.add(guest);
+        hotel.checkGuestsIn(testGuest, familyRoom);
+        assertEquals(1, familyRoom.getNumberGuests());
     }
 
     @Test
