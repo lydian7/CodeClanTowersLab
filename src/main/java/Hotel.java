@@ -8,6 +8,7 @@ public class Hotel {
     private ArrayList<Booking> bookings;
     private HashMap<String, DiningRoom> diningRooms;
 
+
     public Hotel(ArrayList<Bedroom> bedrooms, ArrayList<ConferenceRoom> conferenceRooms, HashMap diningRooms) {
         this.bedrooms = bedrooms;
         this.conferenceRooms = conferenceRooms;
@@ -31,8 +32,8 @@ public class Hotel {
         room.removeGuests();
     }
 
-    public Booking bookRoom(Bedroom bedroom, int noOfNights) {
-        Booking booking = new Booking(bedroom, noOfNights);
+    public Booking bookRoom(Bedroom bedroom, int noOfNights, Guest guest) {
+        Booking booking = new Booking(bedroom, noOfNights, guest);
         bookings.add(booking);
         return booking;
     }
@@ -43,5 +44,15 @@ public class Hotel {
 
     public int getNumberDiningRooms() {
         return diningRooms.size();
+    }
+
+    public ArrayList<Bedroom> getEmptyRooms() {
+        ArrayList<Bedroom> emptyBedrooms = new ArrayList<>();
+        for(Bedroom bedroom : bedrooms){
+            if(bedroom.getNumberGuests() == 0){
+                emptyBedrooms.add(bedroom);
+            }
+        }
+        return emptyBedrooms;
     }
 }

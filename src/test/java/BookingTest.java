@@ -7,11 +7,13 @@ public class BookingTest {
 
     Booking booking;
     Bedroom bedroom;
+    Guest guest;
 
     @Before
     public void before() {
         bedroom = new Bedroom(2, 21, RoomType.DOUBLE, 100);
-        booking = new Booking(bedroom, 4);
+        guest = new Guest("Frank Zappa");
+        booking = new Booking(bedroom, 4, guest);
     }
 
     @Test

@@ -42,7 +42,7 @@ public class HotelTest {
         diningRooms = new HashMap<>();
         diningRooms.put(diningRoom.getName(), diningRoom);
         hotel = new Hotel(bedrooms, conferenceRooms, diningRooms);
-        booking = new Booking(singleRoom, 3);
+        booking = new Booking(singleRoom, 3, guest1);
     }
 
     @Test
@@ -71,13 +71,23 @@ public class HotelTest {
 
     @Test
     public void canBookRoom() {
-        hotel.bookRoom(singleRoom, 4);
+        hotel.bookRoom(singleRoom, 4, guest1);
         assertEquals(1, hotel.getNumberBookings());
     }
 
     @Test
     public void hasDiningRooms() {
         assertEquals(1, hotel.getNumberDiningRooms());
+    }
+
+    @Test
+    public void canReturnEmptyRooms() {
+        Bedroom emptyRoom = new Bedroom(1, 25, RoomType.SINGLE, 100);
+        bedrooms.add(emptyRoom);
+        Hotel hotel2 = new Hotel(bedrooms, conferenceRooms, diningRooms);
+        hotel2.checkGuestsIn(guests, singleRoom);
+        ArrayList<Bedroom> emptyBedrooms = hotel.getEmptyRooms();
+        assertEquals(1, emptyBedrooms.size());
     }
 }
 
