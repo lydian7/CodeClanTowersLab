@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,6 +19,9 @@ public class HotelTest {
     ConferenceRoom conferenceRoom;
     ArrayList<Bedroom> bedrooms;
     ArrayList<ConferenceRoom> conferenceRooms;
+    Booking booking;
+    DiningRoom diningRoom;
+    HashMap<String, DiningRoom> diningRooms;
 
     @Before
     public void before(){
@@ -28,17 +32,17 @@ public class HotelTest {
         guest5 = new Guest("Mary Mendacious");
         guests = new ArrayList<>();
         guests.add(guest1);
-//        guests.add(guest2);
-//        guests.add(guest3);
-//        guests.add(guest4);
-//        guests.add(guest5);
-        singleRoom = new Bedroom(4, 13, RoomType.SINGLE);
+        singleRoom = new Bedroom(4, 13, RoomType.SINGLE, 100);
         conferenceRoom = new ConferenceRoom(4, "The Ambassador's Suite");
         bedrooms = new ArrayList<Bedroom>();
         conferenceRooms = new ArrayList<ConferenceRoom>();
         bedrooms.add(singleRoom);
         conferenceRooms.add(conferenceRoom);
-        hotel = new Hotel(bedrooms, conferenceRooms);
+        diningRoom = new DiningRoom("The Trough", 5);
+        diningRooms = new HashMap<>();
+        diningRooms.put(diningRoom.getName(), diningRoom);
+        hotel = new Hotel(bedrooms, conferenceRooms, diningRooms);
+        booking = new Booking(singleRoom, 3);
     }
 
     @Test
@@ -63,6 +67,17 @@ public class HotelTest {
     public void testCheckOut(){
         hotel.checkGuestsOut(singleRoom);
         assertEquals(0, singleRoom.getNumberGuests());
+    }
+
+    @Test
+    public void canBookRoom() {
+        hotel.bookRoom(singleRoom, 4);
+        assertEquals(1, hotel.getNumberBookings());
+    }
+
+    @Test
+    public void hasDiningRooms() {
+        assertEquals(1, hotel.getNumberDiningRooms());
     }
 }
 
