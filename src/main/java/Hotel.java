@@ -10,12 +10,12 @@ public class Hotel {
         this.conferenceRooms = conferenceRooms;
     }
 
-    public ArrayList<Bedroom> getBedrooms() {
-        return bedrooms;
+    public int getNumberBedrooms() {
+        return bedrooms.size();
     }
 
-    public ArrayList<ConferenceRoom> getConferenceRooms() {
-        return conferenceRooms;
+    public int getNumberConferenceRooms() {
+        return conferenceRooms.size();
     }
 
     public void checkGuestsIn(ArrayList<Guest> guests, Room room){
