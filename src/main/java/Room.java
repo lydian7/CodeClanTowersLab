@@ -13,4 +13,12 @@ public abstract class Room {
     public int getCapacity() {
         return capacity;
     }
+
+    public void addGuests(ArrayList<Guest> guests) {
+        this.guests = guests;
+    }
+
+    public void removeGuests() {
+        this.guests.clear();
+    }
 }

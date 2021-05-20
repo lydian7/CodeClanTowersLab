@@ -19,6 +19,10 @@ public class Hotel {
     }
 
     public void checkGuestsIn(ArrayList<Guest> guests, Room room){
-        
+        room.addGuests(guests);
+    }
+
+    public void checkGuestsOut(Room room) {
+        room.removeGuests();
     }
 }
